@@ -11,7 +11,7 @@ allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip(
 CORS(
     app,
     origins=allowed_origins,
-    supports_credentials=True,                     # set False if you don't use cookies/auth
+    supports_credentials=False,                     # set False if you don't use cookies/auth
     allow_headers=["Content-Type", "Authorization", "Accept", "Origin"],
     expose_headers=["Content-Type"],
     methods=["GET", "POST", "OPTIONS"]
