@@ -5,9 +5,17 @@ from prompt_analysis import run_prompt_evaluation;
 import os
 
 app = Flask(__name__)
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+allowed_origins_raw = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173")
+allowed_origins = [o.strip() for o in allowed_origins_raw.split(",") if o.strip()]
 
-CORS(app, origins=allowed_origins)
+CORS(
+    app,
+    origins=allowed_origins,
+    supports_credentials=True,                     # set False if you don't use cookies/auth
+    allow_headers=["Content-Type", "Authorization", "Accept", "Origin"],
+    expose_headers=["Content-Type"],
+    methods=["GET", "POST", "OPTIONS"]
+)
 
 @app.route("/analyse_prompt", methods=["POST"])
 def analyse_prompt_route():
