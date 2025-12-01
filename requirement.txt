@@ -2,3 +2,4 @@ flask
 flask-cors
 dotenv
 requests
+gunicorn==21.2.0
